@@ -1,0 +1,252 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="headerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#667eea;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#764ba2;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="phaseGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#f093fb;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#f5576c;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="skillGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4facfe;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#00f2fe;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="outcomeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#43e97b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#38f9d7;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8fafc"/>
+  
+  <!-- Header -->
+  <rect x="0" y="0" width="800" height="60" fill="url(#headerGrad)"/>
+  <text x="400" y="35" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="24" font-weight="bold">
+    Pertemuan 4: Proyek Mandiri & Improvisasi
+  </text>
+  
+  <!-- Main Title -->
+  <text x="400" y="90" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="18" font-weight="bold">
+    Siklus Pengembangan Proyek Kreatif
+  </text>
+  
+  <!-- Central Circle - Creative Process -->
+  <circle cx="400" cy="300" r="80" fill="#fff" stroke="#667eea" stroke-width="3"/>
+  <text x="400" y="290" text-anchor="middle" fill="#667eea" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
+    CREATIVE
+  </text>
+  <text x="400" y="310" text-anchor="middle" fill="#667eea" font-family="Arial, sans-serif" font-size="14" font-weight="bold">
+    PROCESS
+  </text>
+  
+  <!-- Phase 1: Brainstorming -->
+  <rect x="50" y="120" width="140" height="80" rx="10" fill="url(#phaseGrad)" opacity="0.9"/>
+  <text x="120" y="145" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    FASE 1
+  </text>
+  <text x="120" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11">
+    Brainstorming
+  </text>
+  <text x="120" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Ide kreatif
+  </text>
+  <text x="120" y="192" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Problem solving
+  </text>
+  
+  <!-- Phase 2: Development -->
+  <rect x="610" y="120" width="140" height="80" rx="10" fill="url(#phaseGrad)" opacity="0.9"/>
+  <text x="680" y="145" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    FASE 2
+  </text>
+  <text x="680" y="165" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11">
+    Development
+  </text>
+  <text x="680" y="180" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Coding
+  </text>
+  <text x="680" y="192" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Implementation
+  </text>
+  
+  <!-- Phase 3: Testing -->
+  <rect x="610" y="420" width="140" height="80" rx="10" fill="url(#phaseGrad)" opacity="0.9"/>
+  <text x="680" y="445" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    FASE 3
+  </text>
+  <text x="680" y="465" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11">
+    Testing
+  </text>
+  <text x="680" y="480" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Debugging
+  </text>
+  <text x="680" y="492" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Optimization
+  </text>
+  
+  <!-- Phase 4: Presentation -->
+  <rect x="50" y="420" width="140" height="80" rx="10" fill="url(#phaseGrad)" opacity="0.9"/>
+  <text x="120" y="445" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    FASE 4
+  </text>
+  <text x="120" y="465" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="11">
+    Presentation
+  </text>
+  <text x="120" y="480" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Demo
+  </text>
+  <text x="120" y="492" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    • Reflection
+  </text>
+  
+  <!-- Arrows connecting phases -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#667eea" />
+    </marker>
+  </defs>
+  
+  <!-- Arrow 1 to 2 -->
+  <path d="M 190 160 Q 300 140 610 160" stroke="#667eea" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow 2 to 3 -->
+  <path d="M 680 200 Q 700 310 680 420" stroke="#667eea" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow 3 to 4 -->
+  <path d="M 610 460 Q 300 480 190 460" stroke="#667eea" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Arrow 4 to 1 (completing cycle) -->
+  <path d="M 120 420 Q 100 310 120 200" stroke="#667eea" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+  
+  <!-- Skills Developed Box -->
+  <rect x="220" y="120" width="160" height="100" rx="8" fill="url(#skillGrad)" opacity="0.9"/>
+  <text x="300" y="140" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    SKILLS DEVELOPED
+  </text>
+  <text x="300" y="160" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Creative Thinking
+  </text>
+  <text x="300" y="175" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Problem Solving
+  </text>
+  <text x="300" y="190" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Independent Learning
+  </text>
+  <text x="300" y="205" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Presentation Skills
+  </text>
+  
+  <!-- Learning Outcomes Box -->
+  <rect x="420" y="420" width="160" height="100" rx="8" fill="url(#outcomeGrad)" opacity="0.9"/>
+  <text x="500" y="440" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    LEARNING OUTCOMES
+  </text>
+  <text x="500" y="460" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Complete Web App
+  </text>
+  <text x="500" y="475" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Portfolio Project
+  </text>
+  <text x="500" y="490" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Confidence Boost
+  </text>
+  <text x="500" y="505" text-anchor="middle" fill="white" font-family="Arial, sans-serif" font-size="10">
+    ✓ Growth Mindset
+  </text>
+  
+  <!-- Key Concepts -->
+  <rect x="220" y="250" width="160" height="120" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="300" y="270" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    KEY CONCEPTS
+  </text>
+  <text x="300" y="290" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Learning by Creating
+  </text>
+  <text x="300" y="305" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Iterative Development
+  </text>
+  <text x="300" y="320" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • User-Centered Design
+  </text>
+  <text x="300" y="335" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Minimal Viable Product
+  </text>
+  <text x="300" y="350" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Continuous Improvement
+  </text>
+  
+  <!-- Project Examples -->
+  <rect x="420" y="250" width="160" height="120" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="500" y="270" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    PROJECT IDEAS
+  </text>
+  <text x="500" y="290" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Personal Diary App
+  </text>
+  <text x="500" y="305" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Habit Tracker
+  </text>
+  <text x="500" y="320" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Recipe Collection
+  </text>
+  <text x="500" y="335" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Study Planner
+  </text>
+  <text x="500" y="350" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Mini Social Network
+  </text>
+  
+  <!-- Success Metrics -->
+  <rect x="50" y="250" width="140" height="120" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="120" y="270" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    SUCCESS METRICS
+  </text>
+  <text x="120" y="290" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    ✓ Functionality
+  </text>
+  <text x="120" y="305" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    ✓ Creativity
+  </text>
+  <text x="120" y="320" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    ✓ User Experience
+  </text>
+  <text x="120" y="335" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    ✓ Code Quality
+  </text>
+  <text x="120" y="350" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    ✓ Presentation
+  </text>
+  
+  <!-- Growth Mindset -->
+  <rect x="610" y="250" width="140" height="120" rx="8" fill="#fff" stroke="#e2e8f0" stroke-width="2"/>
+  <text x="680" y="270" text-anchor="middle" fill="#2d3748" font-family="Arial, sans-serif" font-size="12" font-weight="bold">
+    GROWTH MINDSET
+  </text>
+  <text x="680" y="290" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Embrace Challenges
+  </text>
+  <text x="680" y="305" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Learn from Failures
+  </text>
+  <text x="680" y="320" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Persist Through Obstacles
+  </text>
+  <text x="680" y="335" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Find Inspiration
+  </text>
+  <text x="680" y="350" text-anchor="middle" fill="#4a5568" font-family="Arial, sans-serif" font-size="10">
+    • Celebrate Progress
+  </text>
+  
+  <!-- Bottom Quote -->
+  <rect x="50" y="540" width="700" height="40" rx="20" fill="#667eea" opacity="0.1"/>
+  <text x="400" y="555" text-anchor="middle" fill="#667eea" font-family="Arial, sans-serif" font-size="12" font-style="italic">
+    "The best way to learn programming is by creating something you're passionate about"
+  </text>
+  <text x="400" y="570" text-anchor="middle" fill="#667eea" font-family="Arial, sans-serif" font-size="10">
+    - Learning by Creating Philosophy
+  </text>
+  
+</svg>

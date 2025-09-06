@@ -1,0 +1,225 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-family="Arial, sans-serif" font-size="20" font-weight="bold" fill="#2c3e50">
+    Proses Membangun Aplikasi Client-Server dengan MySQL
+  </text>
+  
+  <!-- Step 1: Setup Flask -->
+  <rect x="50" y="70" width="150" height="80" rx="10" fill="#3498db" stroke="#2980b9" stroke-width="2"/>
+  <text x="125" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    1. Setup Flask
+  </text>
+  <text x="125" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    from flask import Flask
+  </text>
+  <text x="125" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    app = Flask(__name__)
+  </text>
+  <text x="125" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    app.secret_key = 'rahasia'
+  </text>
+  
+  <!-- Arrow 1 -->
+  <path d="M 200 110 L 240 110" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 2: Data Structure -->
+  <rect x="250" y="70" width="150" height="80" rx="10" fill="#e74c3c" stroke="#c0392b" stroke-width="2"/>
+  <text x="325" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    2. Struktur Data
+  </text>
+  <text x="325" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    data_list = []
+  </text>
+  <text x="325" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    {'id': 1, 'nama': 'contoh'}
+  </text>
+  <text x="325" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    Dictionary dalam List
+  </text>
+  
+  <!-- Arrow 2 -->
+  <path d="M 400 110 L 440 110" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 3: Routes -->
+  <rect x="450" y="70" width="150" height="80" rx="10" fill="#f39c12" stroke="#e67e22" stroke-width="2"/>
+  <text x="525" y="95" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    3. Buat Routes
+  </text>
+  <text x="525" y="110" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    @app.route('/')
+  </text>
+  <text x="525" y="125" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    @app.route('/tambah')
+  </text>
+  <text x="525" y="140" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    GET & POST methods
+  </text>
+  
+  <!-- Arrow 3 (down) -->
+  <path d="M 525 150 L 525 190" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 4: CREATE Function -->
+  <rect x="450" y="200" width="150" height="80" rx="10" fill="#27ae60" stroke="#229954" stroke-width="2"/>
+  <text x="525" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    4. CREATE (Tambah)
+  </text>
+  <text x="525" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    request.form['nama']
+  </text>
+  <text x="525" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    data_list.append()
+  </text>
+  <text x="525" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    flash() & redirect()
+  </text>
+  
+  <!-- Arrow 4 (left) -->
+  <path d="M 450 240 L 410 240" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 5: READ Function -->
+  <rect x="250" y="200" width="150" height="80" rx="10" fill="#9b59b6" stroke="#8e44ad" stroke-width="2"/>
+  <text x="325" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    5. READ (Tampil)
+  </text>
+  <text x="325" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    render_template()
+  </text>
+  <text x="325" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    kirim data ke HTML
+  </text>
+  <text x="325" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    loop {% for %}
+  </text>
+  
+  <!-- Arrow 5 (left) -->
+  <path d="M 250 240 L 210 240" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 6: UPDATE Function -->
+  <rect x="50" y="200" width="150" height="80" rx="10" fill="#e67e22" stroke="#d35400" stroke-width="2"/>
+  <text x="125" y="225" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    6. UPDATE (Edit)
+  </text>
+  <text x="125" y="240" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    cari data by ID
+  </text>
+  <text x="125" y="255" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    update dictionary
+  </text>
+  <text x="125" y="270" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    <int:id> parameter
+  </text>
+  
+  <!-- Arrow 6 (down) -->
+  <path d="M 125 280 L 125 320" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 7: DELETE Function -->
+  <rect x="50" y="330" width="150" height="80" rx="10" fill="#c0392b" stroke="#a93226" stroke-width="2"/>
+  <text x="125" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    7. DELETE (Hapus)
+  </text>
+  <text x="125" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    cari index data
+  </text>
+  <text x="125" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    data_list.remove()
+  </text>
+  <text x="125" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    konfirmasi hapus
+  </text>
+  
+  <!-- Arrow 7 (right) -->
+  <path d="M 200 370 L 240 370" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 8: Templates -->
+  <rect x="250" y="330" width="150" height="80" rx="10" fill="#17a2b8" stroke="#138496" stroke-width="2"/>
+  <text x="325" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    8. HTML Templates
+  </text>
+  <text x="325" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    index.html (list)
+  </text>
+  <text x="325" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    form.html (input)
+  </text>
+  <text x="325" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    Jinja2 syntax
+  </text>
+  
+  <!-- Arrow 8 (right) -->
+  <path d="M 400 370 L 440 370" stroke="#34495e" stroke-width="2" marker-end="url(#arrowhead)"/>
+  
+  <!-- Step 9: Testing -->
+  <rect x="450" y="330" width="150" height="80" rx="10" fill="#6c757d" stroke="#5a6268" stroke-width="2"/>
+  <text x="525" y="355" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="white">
+    9. Testing & Debug
+  </text>
+  <text x="525" y="370" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    app.run(debug=True)
+  </text>
+  <text x="525" y="385" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    test semua fitur
+  </text>
+  <text x="525" y="400" text-anchor="middle" font-family="Arial, sans-serif" font-size="10" fill="white">
+    fix error
+  </text>
+  
+  <!-- Key Concepts Box -->
+  <rect x="50" y="450" width="700" height="120" rx="10" fill="#f8f9fa" stroke="#dee2e6" stroke-width="2"/>
+  <text x="400" y="475" text-anchor="middle" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#495057">
+    🔑 Konsep Kunci Membangun dari Nol
+  </text>
+  
+  <!-- Key Points -->
+  <text x="70" y="500" font-family="Arial, sans-serif" font-size="12" fill="#495057">
+    ✅ <tspan font-weight="bold">Struktur Data:</tspan> Mulai dengan list kosong, tambahkan dictionary untuk setiap item
+  </text>
+  <text x="70" y="520" font-family="Arial, sans-serif" font-size="12" fill="#495057">
+    ✅ <tspan font-weight="bold">Route Planning:</tspan> Pikirkan URL apa saja yang dibutuhkan (/, /tambah, /edit, /hapus)
+  </text>
+  <text x="70" y="540" font-family="Arial, sans-serif" font-size="12" fill="#495057">
+    ✅ <tspan font-weight="bold">CRUD Pattern:</tspan> Create → Read → Update → Delete (urutan implementasi)
+  </text>
+  <text x="70" y="560" font-family="Arial, sans-serif" font-size="12" fill="#495057">
+    ✅ <tspan font-weight="bold">Template Engine:</tspan> Pisahkan logika Python dan tampilan HTML
+  </text>
+  
+  <!-- Arrow marker definition -->
+  <defs>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#34495e"/>
+    </marker>
+  </defs>
+  
+  <!-- Flow indicators -->
+  <text x="650" y="100" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">
+    Alur Pengembangan →
+  </text>
+  <text x="650" y="115" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">
+    1. Setup → 2. Data → 3. Routes
+  </text>
+  <text x="650" y="130" font-family="Arial, sans-serif" font-size="10" fill="#7f8c8d">
+    4. CRUD → 5. Templates → 6. Test
+  </text>
+  
+  <!-- Tips Box -->
+  <rect x="620" y="200" width="160" height="100" rx="8" fill="#fff3cd" stroke="#ffeaa7" stroke-width="2"/>
+  <text x="700" y="220" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="bold" fill="#856404">
+    💡 Tips Coding
+  </text>
+  <text x="630" y="240" font-family="Arial, sans-serif" font-size="10" fill="#856404">
+    • Mulai sederhana
+  </text>
+  <text x="630" y="255" font-family="Arial, sans-serif" font-size="10" fill="#856404">
+    • Test setiap step
+  </text>
+  <text x="630" y="270" font-family="Arial, sans-serif" font-size="10" fill="#856404">
+    • Debug dengan print()
+  </text>
+  <text x="630" y="285" font-family="Arial, sans-serif" font-size="10" fill="#856404">
+    • Baca error message
+  </text>
+  
+</svg>

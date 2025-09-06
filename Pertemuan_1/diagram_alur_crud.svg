@@ -1,0 +1,117 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .title { font-family: Arial, sans-serif; font-size: 18px; font-weight: bold; fill: #2c3e50; }
+      .subtitle { font-family: Arial, sans-serif; font-size: 14px; fill: #34495e; }
+      .step-text { font-family: Arial, sans-serif; font-size: 12px; fill: #2c3e50; }
+      .client-box { fill: #3498db; stroke: #2980b9; stroke-width: 2; }
+      .server-box { fill: #e74c3c; stroke: #c0392b; stroke-width: 2; }
+      .process-box { fill: #f39c12; stroke: #e67e22; stroke-width: 2; }
+      .arrow { stroke: #2c3e50; stroke-width: 2; fill: none; marker-end: url(#arrowhead); }
+      .step-number { font-family: Arial, sans-serif; font-size: 14px; font-weight: bold; fill: white; }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2c3e50" />
+    </marker>
+  </defs>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" class="title">Alur Kerja CRUD: Tambah Data Siswa</text>
+  <text x="400" y="50" text-anchor="middle" class="subtitle">Pertemuan 1 - Memahami Client-Server</text>
+  
+  <!-- Client Side -->
+  <text x="150" y="80" text-anchor="middle" class="subtitle">CLIENT (Browser)</text>
+  
+  <!-- Server Side -->
+  <text x="650" y="80" text-anchor="middle" class="subtitle">SERVER (Flask)</text>
+  
+  <!-- Step 1: User clicks Add -->
+  <rect x="50" y="100" width="200" height="40" rx="5" class="client-box"/>
+  <circle cx="70" cy="120" r="12" fill="#2980b9"/>
+  <text x="70" y="125" text-anchor="middle" class="step-number">1</text>
+  <text x="150" y="125" text-anchor="middle" class="step-text" fill="white">User klik "Tambah Data"</text>
+  
+  <!-- Arrow 1 -->
+  <line x1="250" y1="120" x2="550" y2="120" class="arrow"/>
+  <text x="400" y="115" text-anchor="middle" class="step-text">GET /tambah</text>
+  
+  <!-- Step 2: Server sends form -->
+  <rect x="550" y="100" width="200" height="40" rx="5" class="server-box"/>
+  <circle cx="570" cy="120" r="12" fill="#c0392b"/>
+  <text x="570" y="125" text-anchor="middle" class="step-number">2</text>
+  <text x="650" y="125" text-anchor="middle" class="step-text" fill="white">Kirim form HTML</text>
+  
+  <!-- Arrow 2 -->
+  <line x1="550" y1="160" x2="250" y2="160" class="arrow"/>
+  <text x="400" y="155" text-anchor="middle" class="step-text">HTML Form</text>
+  
+  <!-- Step 3: User fills form -->
+  <rect x="50" y="180" width="200" height="40" rx="5" class="client-box"/>
+  <circle cx="70" cy="200" r="12" fill="#2980b9"/>
+  <text x="70" y="205" text-anchor="middle" class="step-number">3</text>
+  <text x="150" y="205" text-anchor="middle" class="step-text" fill="white">User isi form & submit</text>
+  
+  <!-- Arrow 3 -->
+  <line x1="250" y1="200" x2="550" y2="200" class="arrow"/>
+  <text x="400" y="195" text-anchor="middle" class="step-text">POST /tambah + data</text>
+  
+  <!-- Step 4: Server processes -->
+  <rect x="550" y="180" width="200" height="40" rx="5" class="server-box"/>
+  <circle cx="570" cy="200" r="12" fill="#c0392b"/>
+  <text x="570" y="205" text-anchor="middle" class="step-number">4</text>
+  <text x="650" y="205" text-anchor="middle" class="step-text" fill="white">Proses & simpan data</text>
+  
+  <!-- Step 5: Data processing -->
+  <rect x="550" y="240" width="200" height="60" rx="5" class="process-box"/>
+  <circle cx="570" cy="260" r="12" fill="#e67e22"/>
+  <text x="570" y="265" text-anchor="middle" class="step-number">5</text>
+  <text x="650" y="255" text-anchor="middle" class="step-text">request.form['nama']</text>
+  <text x="650" y="270" text-anchor="middle" class="step-text">data_siswa.append()</text>
+  <text x="650" y="285" text-anchor="middle" class="step-text">flash('Berhasil!')</text>
+  
+  <!-- Arrow 4 -->
+  <line x1="550" y1="320" x2="250" y2="320" class="arrow"/>
+  <text x="400" y="315" text-anchor="middle" class="step-text">redirect('/')</text>
+  
+  <!-- Step 6: Browser redirects -->
+  <rect x="50" y="340" width="200" height="40" rx="5" class="client-box"/>
+  <circle cx="70" cy="360" r="12" fill="#2980b9"/>
+  <text x="70" y="365" text-anchor="middle" class="step-number">6</text>
+  <text x="150" y="365" text-anchor="middle" class="step-text" fill="white">Browser ke halaman utama</text>
+  
+  <!-- Arrow 5 -->
+  <line x1="250" y1="360" x2="550" y2="360" class="arrow"/>
+  <text x="400" y="355" text-anchor="middle" class="step-text">GET /</text>
+  
+  <!-- Step 7: Server sends updated page -->
+  <rect x="550" y="340" width="200" height="40" rx="5" class="server-box"/>
+  <circle cx="570" cy="360" r="12" fill="#c0392b"/>
+  <text x="570" y="365" text-anchor="middle" class="step-number">7</text>
+  <text x="650" y="365" text-anchor="middle" class="step-text" fill="white">Kirim halaman terupdate</text>
+  
+  <!-- Arrow 6 -->
+  <line x1="550" y1="400" x2="250" y2="400" class="arrow"/>
+  <text x="400" y="395" text-anchor="middle" class="step-text">HTML + data baru</text>
+  
+  <!-- Step 8: User sees result -->
+  <rect x="50" y="420" width="200" height="40" rx="5" class="client-box"/>
+  <circle cx="70" cy="440" r="12" fill="#2980b9"/>
+  <text x="70" y="445" text-anchor="middle" class="step-number">8</text>
+  <text x="150" y="445" text-anchor="middle" class="step-text" fill="white">User lihat data baru</text>
+  
+  <!-- Legend -->
+  <rect x="50" y="480" width="700" height="100" rx="5" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="400" y="500" text-anchor="middle" class="subtitle">Penjelasan Warna:</text>
+  
+  <rect x="80" y="510" width="15" height="15" class="client-box"/>
+  <text x="105" y="522" class="step-text">Client (Browser) - Tempat user berinteraksi</text>
+  
+  <rect x="320" y="510" width="15" height="15" class="server-box"/>
+  <text x="345" y="522" class="step-text">Server (Flask) - Memproses request</text>
+  
+  <rect x="540" y="510" width="15" height="15" class="process-box"/>
+  <text x="565" y="522" class="step-text">Proses Internal - Logic aplikasi</text>
+  
+  <text x="80" y="545" class="step-text">💡 Tips: Perhatikan bahwa setiap aksi user (client) memicu response dari server</text>
+  <text x="80" y="560" class="step-text">🔄 Pattern: Request → Process → Response → Redirect → Request → Response</text>
+</svg>

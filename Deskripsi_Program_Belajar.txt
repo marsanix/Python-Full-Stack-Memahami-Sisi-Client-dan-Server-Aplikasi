@@ -1,0 +1,94 @@
+Nama Program: Python Full-Stack: Memahami Sisi Client dan Server Aplikasi
+Deskripsi Program: Program Bimbingan Belajar Python untuk Siswa SMP yang membahas tentang Python Full-Stack - Memahami Sisi Client dan Server Aplikasi dengan durasi belajar tatap muka selama 2 jam sebanyak 4 kali pertemuan.
+
+Catatan:
+Sebagai catatan siswa SMP yang mengikuti bimbel ini sudah memahami dasar Python dan pernah membuat aplikasi web CRUD sederhana dengan Flask, tetapi dari hasil analisa masih belum benar-benar memahami arsitektur client-server dan bagaimana komponen-komponen saling berinteraksi. Program ini dirancang untuk memperdalam pemahaman tentang bagaimana aplikasi web bekerja dari sisi frontend (client) dan backend (server), serta bagaimana database MySQL menghubungkan keduanya. Apakah cukup dengan 4 kali pertemuan (1 pertemuan 2 jam)? 
+
+Hasil Analisa dan jawaban dari catatan diatas:
+Ini situasi yang umum terjadi. Anak-anak SMP seringkali bisa mengikuti petunjuk teknis, tetapi pemahaman tentang arsitektur client-server belum terbentuk. Fokus utama program ini adalah memperdalam pemahaman tentang bagaimana client (frontend) dan server (backend) bekerja sama dalam aplikasi web modern.
+
+Tips dan Pendekatan Mengajar
+Fokus pada Konsep, Bukan Hanya Kode: Sebelum menulis kode, ajak dia menggambar atau menjelaskan alur program di papan tulis atau kertas. Gunakan analogi yang lebih sederhana. Misalnya, CR-UD (Create-Read-Update-Delete) bisa dianalogikan dengan kegiatan sehari-hari, seperti mengelola daftar belanjaan di buku catatan.
+
+Create: Menambah item baru.
+
+Read: Membaca daftar item yang sudah ada.
+
+Update: Mengganti item yang salah.
+
+Delete: Mencoret item yang sudah dibeli.
+
+Ajak Berpikir Kritis: Jangan berikan solusi langsung. Tanyakan "Kenapa kita pakai ini?" atau "Kalau mau ubah ini, bagian mana yang harus diubah?". Dorong dia untuk menjelaskan cara kerja setiap baris kode dengan bahasanya sendiri.
+
+Teknik "Problem-Solving Terbalik": Berikan proyek yang sedikit berbeda. Misalnya, jika sebelumnya dia membuat aplikasi ToDo List, minta dia membuat aplikasi Catatan Resep Makanan. Walaupun fungsionalitasnya sama, perubahan topik akan memaksa dia untuk tidak hanya menyalin kode, melainkan harus berpikir dari awal.
+
+Sesi Debugging: Berikan kode yang sengaja salah (error) dan minta dia memperbaikinya. Ini melatih kemampuan dia dalam membaca pesan error dan memahami logika program.
+
+Kurikulum Baru (4 Pertemuan)
+Kurikulum ini dirancang untuk memperkuat pemahaman, bukan menambah materi baru.
+
+Pertemuan 1: Membongkar Ulang Aplikasi CRUD 🛠️
+Tujuan: Memahami secara mendalam setiap komponen dalam aplikasi web CRUD yang pernah dibuat.
+
+15 menit: Ulasan singkat: Minta dia menjelaskan apa itu Flask, routing, dan template HTML dengan bahasanya sendiri. Perbaiki kesalahpahaman yang ada.
+
+30 menit: Membongkar Kode CRUD: Buka kembali kode yang pernah dibuat. Soroti setiap bagian penting dan tanyakan fungsinya. Misalnya:
+
+@app.route('/tambah_data', methods=['POST']): "Kenapa kita pakai POST di sini? Apa bedanya dengan GET?"
+
+if request.method == 'POST': "Bagian ini gunanya untuk apa? Kenapa perlu ada kondisi if?"
+
+45 menit: Visualisasi Alur Kerja: Minta dia membuat diagram alur (flowchart) sederhana dari proses CREATE data. Mulai dari pengguna klik tombol, data dikirim ke server, diproses oleh Flask, lalu disimpan.
+
+30 menit: Latihan: Mengubah Fungsi Dasar: Berikan tantangan kecil. Misalnya, minta dia mengubah alur "Update" sehingga data yang diubah harus dikonfirmasi dua kali.
+
+Pertemuan 2: Membangun Ulang dari Nol (Minimalis) 🏗️
+Tujuan: Membangun aplikasi CRUD yang sama dari awal dengan pemahaman yang lebih baik.
+
+15 menit: Review singkat alur pertemuan sebelumnya.
+
+90 menit: Coding Session: Minta dia membuat ulang aplikasi CRUD sederhana. Jangan berikan kode; biarkan dia yang mencoba mengingat dan menulisnya. Anda hanya bertindak sebagai fasilitator yang memberikan petunjuk saat dia buntu.
+
+Langkah 1: Buat app.py kosong dan buat rute pertama (/).
+
+Langkah 2: Tambahkan data dummy (misal: list of dictionary).
+
+Langkah 3: Tambahkan fungsi READ (menampilkan semua data).
+
+Langkah 4: Lanjutkan ke fungsi CREATE.
+
+15 menit: Pentingnya Template HTML: Jelaskan ulang hubungan antara kode Python di Flask dan file HTML. Minta dia menjelaskan kenapa data perlu dilewatkan (render_template('index.html', data=data)).
+
+Pertemuan 3: Integrasi Data & Validasi Input 🛡️
+Tujuan: Memahami bagaimana data mengalir di aplikasi dan pentingnya validasi.
+
+30 menit: Dari Formulir ke Database: Jelaskan secara visual bagaimana data yang diinput di formulir HTML (<form>) sampai ke Python (request.form).
+
+60 menit: Validasi Sederhana: Ajak dia menambahkan validasi ke dalam aplikasi.
+
+Contoh: Tambahkan kode yang akan menolak input jika nama produk kosong.
+
+Diskusi: "Kenapa validasi itu penting? Apa yang terjadi kalau kita tidak melakukan validasi?"
+
+30 menit: Latihan Debugging Lanjutan: Berikan lagi kode yang disengaja salah, misalnya dengan salah nama variabel atau salah tipe data. Minta dia mencari dan memperbaikinya.
+
+Pertemuan 4: Proyek Mandiri & Improvisasi 💡
+Tujuan: Memberikan dia ruang untuk berkreasi dan mengaplikasikan semua yang sudah dipelajari.
+
+15 menit: Brainstorming Proyek: Minta dia memikirkan ide aplikasi web sederhana yang berguna baginya. Contoh:
+
+Aplikasi untuk mencatat jadwal pelajaran.
+
+Aplikasi untuk mencatat koleksi mainan atau kartu.
+
+Aplikasi kalkulator yang lebih kompleks (misal, kalkulator untuk menghitung kalori makanan).
+
+105 menit: Mulai Membuat Proyek: Dampingi dia untuk memulai proyek pilihannya. Fokusnya bukan pada hasilnya, melainkan pada prosesnya. Biarkan dia mencoba membuat struktur folder, menulis rute, dan merancang tampilan dasar secara mandiri.
+
+Apakah 4 kali pertemuan cukup?
+
+Ya, sangat mungkin 4 pertemuan cukup, asalkan fokusnya adalah memperdalam, bukan menambah. Pertemuan tersebut akan menjadi fondasi yang kuat, membuat dia tidak hanya bisa meniru kode, tetapi juga mengerti logika di baliknya. Ini adalah langkah paling penting untuk bisa melakukan improvisasi dan pada akhirnya, membuat produk yang bermanfaat.
+
+
+Catatan Tambahan:
+Siswa sudah mempelajari database MySQL dan sudah mengintegrasikan ke Python, tetapi masih belum benar-benar menguasai dan masih perlu latihan.
