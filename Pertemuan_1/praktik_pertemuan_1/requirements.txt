@@ -1,0 +1,18 @@
+# Requirements untuk Praktik Pertemuan 1
+# Aplikasi CRUD Flask dengan MySQL
+
+# Framework web
+Flask==2.3.3
+Werkzeug==2.3.7
+
+# Database connector
+mysql-connector-python==8.1.0
+
+# Template engine (sudah termasuk dalam Flask)
+Jinja2==3.1.2
+
+# Utilities
+python-dotenv==1.0.0
+
+# Development dependencies (opsional)
+# flask-debugtoolbar==0.13.1

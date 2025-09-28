@@ -1,0 +1,91 @@
+# Docker Compose untuk Praktik Pertemuan 1
+# Aplikasi CRUD Flask dengan MySQL
+
+version: '3.8'
+
+services:
+  # Service MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: praktik_mysql
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_DATABASE: python_fullstack_smp
+      MYSQL_USER: flask_user
+      MYSQL_PASSWORD: flask_password
+    ports:
+      - "3306:3306"
+    volumes:
+      # Mount script SQL untuk inisialisasi database
+      - ./database_setup.sql:/docker-entrypoint-initdb.d/database_setup.sql
+      # Volume untuk persistent data
+      - mysql_data:/var/lib/mysql
+    networks:
+      - praktik_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
+
+  # Service Flask Application
+  flask_app:
+    build: 
+      context: .
+      dockerfile: Dockerfile
+    container_name: praktik_flask
+    restart: unless-stopped
+    ports:
+      - "5000:5000"
+    environment:
+      # Environment variables untuk koneksi database
+      DB_HOST: mysql
+      DB_PORT: 3306
+      DB_NAME: python_fullstack_smp
+      DB_USER: root
+      DB_PASSWORD: toor
+      FLASK_ENV: development
+      FLASK_DEBUG: 1
+    volumes:
+      # Mount source code untuk development (hot reload)
+      - ../Praktik_Pertemuan_1.py:/app/Praktik_Pertemuan_1.py
+      - ./templates:/app/templates
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - praktik_network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5000/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # Service phpMyAdmin (opsional, untuk management database)
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: praktik_phpmyadmin
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: toor
+    ports:
+      - "8080:80"
+    depends_on:
+      mysql:
+        condition: service_healthy
+    networks:
+      - praktik_network
+
+# Networks
+networks:
+  praktik_network:
+    driver: bridge
+
+# Volumes untuk persistent data
+volumes:
+  mysql_data:
+    driver: local
