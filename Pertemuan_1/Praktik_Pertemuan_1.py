@@ -75,10 +75,18 @@ def test_connection():
 # FUNGSI CRUD OPERATIONS (MySQL)
 # =====================================================
 
-def get_all_siswa():
-    """READ: Mengambil semua data siswa"""
-    query = "SELECT * FROM siswa ORDER BY id DESC"
-    result = execute_query(query, fetch=True)
+def get_all_siswa(filter_nama=None):
+    """READ: Mengambil semua data siswa dengan filter opsional berdasarkan nama"""
+    if filter_nama:
+        # Jika ada filter nama, gunakan LIKE untuk pencarian partial
+        query = "SELECT * FROM siswa WHERE nama LIKE %s ORDER BY id DESC"
+        search_term = f"%{filter_nama}%"
+        result = execute_query(query, (search_term,), fetch=True)
+    else:
+        # Jika tidak ada filter, ambil semua data
+        query = "SELECT * FROM siswa ORDER BY id DESC"
+        result = execute_query(query, fetch=True)
+    
     return result or []
 
 def get_siswa_by_id(siswa_id):
@@ -138,7 +146,7 @@ def search_siswa(keyword):
     return result or []
 
 # Membuat aplikasi Flask
-app = Flask(__name__)
+app = Flask(__name__, template_folder='praktik_pertemuan_1/templates')
 app.secret_key = 'kunci_rahasia_untuk_flash_message'  # Diperlukan untuk flash message
 
 # LATIHAN 1: PAHAMI ROUTING DASAR
@@ -151,9 +159,21 @@ def halaman_utama():
     1. Kenapa pakai @app.route('/')?
     2. Apa yang dikembalikan oleh fungsi ini?
     3. Bagaimana data_siswa sampai ke template HTML?
+    4. Bagaimana filter nama bekerja melalui query parameter?
     """
-    data_siswa = get_all_siswa()
-    return render_template('index.html', siswa_list=data_siswa)
+    # Ambil parameter filter nama dari query string (contoh: /?filter_nama=john)
+    filter_nama = request.args.get('filter_nama', '').strip()
+    
+    # Jika filter_nama kosong, set ke None agar mengambil semua data
+    if not filter_nama:
+        filter_nama = None
+    
+    data_siswa = get_all_siswa(filter_nama=filter_nama)
+    
+    # Kirim juga informasi filter ke template untuk ditampilkan
+    return render_template('index.html', 
+                         siswa_list=data_siswa, 
+                         current_filter=filter_nama)
 
 # LATIHAN 2: PAHAMI METHOD GET DAN POST
 @app.route('/tambah', methods=['GET', 'POST'])

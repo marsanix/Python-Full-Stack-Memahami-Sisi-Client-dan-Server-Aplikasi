@@ -283,6 +283,38 @@
                 </a>
             </div>
 
+            <!-- Quick Filter by Name -->
+            <div style="background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 30px; border-left: 4px solid #667eea;">
+                <h3 style="margin-bottom: 15px; color: #333; display: flex; align-items: center; gap: 10px;">
+                    🔍 Filter Cepat Berdasarkan Nama
+                </h3>
+                <form method="GET" action="/" style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
+                    <input 
+                        type="text" 
+                        name="filter_nama" 
+                        value="{{ current_filter or '' }}" 
+                        placeholder="Masukkan nama siswa..." 
+                        style="flex: 1; min-width: 200px; padding: 12px; border: 2px solid #ddd; border-radius: 8px; font-size: 1em; transition: border-color 0.3s ease;"
+                        onfocus="this.style.borderColor='#667eea'"
+                        onblur="this.style.borderColor='#ddd'"
+                    >
+                    <button type="submit" class="btn btn-info" style="margin: 0;">
+                        🔍 Filter
+                    </button>
+                    {% if current_filter %}
+                        <a href="/" class="btn btn-warning" style="margin: 0;">
+                            ❌ Reset
+                        </a>
+                    {% endif %}
+                </form>
+                {% if current_filter %}
+                    <div style="margin-top: 10px; padding: 8px 12px; background: #e3f2fd; border-radius: 6px; color: #1976d2; font-weight: bold;">
+                        📋 Menampilkan hasil untuk: "{{ current_filter }}" 
+                        ({{ siswa_list|length }} siswa ditemukan)
+                    </div>
+                {% endif %}
+            </div>
+
             <!-- Statistics Cards -->
             {% if siswa_list %}
                 <div class="stats-grid">
