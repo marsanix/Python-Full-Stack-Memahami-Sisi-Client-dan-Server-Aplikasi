@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Siswa Baru - Praktik Pertemuan 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .back-button {
+            margin-bottom: 30px;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-size: 1.1em;
+            padding: 15px 30px;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .flash-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .form-container {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #333;
+            font-size: 1.1em;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #e9ecef;
+            border-radius: 8px;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            background: white;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #667eea;
+            box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        .form-group .help-text {
+            font-size: 0.9em;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .form-actions {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .required {
+            color: #dc3545;
+        }
+
+        .form-tips {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .form-tips h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .form-tips ul {
+            margin-left: 20px;
+            color: #424242;
+        }
+
+        .form-tips li {
+            margin-bottom: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .form-container {
+                padding: 20px;
+            }
+            
+            .form-actions {
+                flex-direction: column;
+            }
+            
+            .btn {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>➕ Tambah Siswa Baru</h1>
+            <p>Masukkan data siswa baru ke dalam sistem</p>
+        </div>
+
+        <div class="content">
+            <!-- Back Button -->
+            <div class="back-button">
+                <a href="/" class="btn btn-secondary">
+                    ← Kembali ke Daftar Siswa
+                </a>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ 'success' if category == 'success' else 'error' }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Form Tips -->
+            <div class="form-tips">
+                <h3>💡 Tips Pengisian Form</h3>
+                <ul>
+                    <li>Pastikan nama siswa diisi dengan lengkap</li>
+                    <li>Format kelas: 7A, 7B, 8A, 8B, 9A, 9B, dst.</li>
+                    <li>Umur harus berupa angka (12-18 tahun)</li>
+                    <li>Alamat sebaiknya lengkap dengan nama jalan dan kota</li>
+                    <li>Semua field yang bertanda <span class="required">*</span> wajib diisi</li>
+                </ul>
+            </div>
+
+            <!-- Form -->
+            <div class="form-container">
+                <form method="POST" id="tambahSiswaForm">
+                    <div class="form-group">
+                        <label for="nama">Nama Lengkap <span class="required">*</span></label>
+                        <input type="text" id="nama" name="nama" required maxlength="100" 
+                               placeholder="Contoh: Ahmad Rizki Pratama">
+                        <div class="help-text">Masukkan nama lengkap siswa (maksimal 100 karakter)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="kelas">Kelas <span class="required">*</span></label>
+                        <select id="kelas" name="kelas" required>
+                            <option value="">-- Pilih Kelas --</option>
+                            <option value="7A">7A</option>
+                            <option value="7B">7B</option>
+                            <option value="7C">7C</option>
+                            <option value="7D">7D</option>
+                            <option value="8A">8A</option>
+                            <option value="8B">8B</option>
+                            <option value="8C">8C</option>
+                            <option value="8D">8D</option>
+                            <option value="9A">9A</option>
+                            <option value="9B">9B</option>
+                            <option value="9C">9C</option>
+                            <option value="9D">9D</option>
+                        </select>
+                        <div class="help-text">Pilih kelas siswa dari dropdown</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="umur">Umur <span class="required">*</span></label>
+                        <input type="number" id="umur" name="umur" required min="10" max="20" 
+                               placeholder="Contoh: 13">
+                        <div class="help-text">Masukkan umur siswa (10-20 tahun)</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="alamat">Alamat Lengkap <span class="required">*</span></label>
+                        <textarea id="alamat" name="alamat" required maxlength="500" 
+                                  placeholder="Contoh: Jl. Merdeka No. 123, RT 02/RW 05, Kelurahan Sukamaju, Jakarta Selatan"></textarea>
+                        <div class="help-text">Masukkan alamat lengkap siswa (maksimal 500 karakter)</div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">
+                            💾 Simpan Data Siswa
+                        </button>
+                        <a href="/" class="btn btn-secondary">
+                            ❌ Batal
+                        </a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Auto hide flash messages after 5 seconds
+        setTimeout(function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.style.transition = 'opacity 0.5s ease';
+                message.style.opacity = '0';
+                setTimeout(function() {
+                    message.remove();
+                }, 500);
+            });
+        }, 5000);
+
+        // Form validation
+        document.getElementById('tambahSiswaForm').addEventListener('submit', function(e) {
+            const nama = document.getElementById('nama').value.trim();
+            const kelas = document.getElementById('kelas').value;
+            const umur = document.getElementById('umur').value;
+            const alamat = document.getElementById('alamat').value.trim();
+
+            // Validate nama
+            if (nama.length < 2) {
+                alert('Nama siswa harus minimal 2 karakter!');
+                e.preventDefault();
+                return;
+            }
+
+            // Validate kelas
+            if (!kelas) {
+                alert('Silakan pilih kelas siswa!');
+                e.preventDefault();
+                return;
+            }
+
+            // Validate umur
+            if (umur < 10 || umur > 20) {
+                alert('Umur siswa harus antara 10-20 tahun!');
+                e.preventDefault();
+                return;
+            }
+
+            // Validate alamat
+            if (alamat.length < 10) {
+                alert('Alamat harus minimal 10 karakter!');
+                e.preventDefault();
+                return;
+            }
+
+            // Confirm submission
+            if (!confirm('Apakah data yang dimasukkan sudah benar?')) {
+                e.preventDefault();
+                return;
+            }
+        });
+
+        // Auto capitalize nama
+        document.getElementById('nama').addEventListener('input', function(e) {
+            let value = e.target.value;
+            // Capitalize first letter of each word
+            value = value.replace(/\b\w/g, function(char) {
+                return char.toUpperCase();
+            });
+            e.target.value = value;
+        });
+
+        // Auto format alamat
+        document.getElementById('alamat').addEventListener('input', function(e) {
+            let value = e.target.value;
+            // Capitalize first letter of each sentence
+            value = value.replace(/(^|\. )(\w)/g, function(match, p1, p2) {
+                return p1 + p2.toUpperCase();
+            });
+            e.target.value = value;
+        });
+    </script>
+</body>
+</html>

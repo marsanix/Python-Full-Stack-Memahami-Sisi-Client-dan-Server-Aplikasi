@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="800" viewBox="0 0 1200 800">
+  <defs>
+    <style>
+      .title { font: 700 26px 'Segoe UI', Arial, sans-serif; fill: #1f2937; }
+      .subtitle { font: 600 18px 'Segoe UI', Arial, sans-serif; fill: #374151; }
+      .label { font: 600 14px 'Segoe UI', Arial, sans-serif; fill: #111827; }
+      .small { font: 12px 'Segoe UI', Arial, sans-serif; fill: #111827; }
+      .muted { fill: #4b5563; font: 12px 'Segoe UI', Arial, sans-serif; }
+      .box { fill: #ffffff; stroke: #1f2937; stroke-width: 2; rx: 10; }
+      .soft { fill: #f9fafb; stroke: #e5e7eb; stroke-width: 2; rx: 10; }
+      .device { fill: #eef2ff; stroke: #4338ca; stroke-width: 2; rx: 10; }
+      .server { fill: #ecfeff; stroke: #0e7490; stroke-width: 2; rx: 10; }
+      .switch { fill: #fff7ed; stroke: #c2410c; stroke-width: 2; rx: 8; }
+      .router { fill: #fef2f2; stroke: #b91c1c; stroke-width: 2; rx: 8; }
+      .legend { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; rx: 10; }
+      .line { stroke: #6b7280; stroke-width: 2.5; }
+      .dashed { stroke-dasharray: 6 6; }
+    </style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1200" height="800" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="600" y="60" text-anchor="middle" class="title">Topologi Jaringan Lokal: Arsitektur Client-Server</text>
+  <text x="600" y="90" text-anchor="middle" class="subtitle">Pertemuan 1 • Memahami Peran Client, Server, Router, dan Switch di LAN</text>
+
+  <!-- LAN zone frame -->
+  <rect x="80" y="120" width="1040" height="600" class="soft"/>
+  <text x="100" y="150" class="muted">Zona LAN (192.168.1.0/24)</text>
+
+  <!-- Router/Gateway -->
+  <rect x="520" y="160" width="160" height="70" class="router"/>
+  <text x="600" y="190" text-anchor="middle" class="label">Router / Gateway</text>
+  <text x="600" y="210" text-anchor="middle" class="small">IP: 192.168.1.1</text>
+
+  <!-- Switch -->
+  <rect x="520" y="270" width="160" height="60" class="switch"/>
+  <text x="600" y="305" text-anchor="middle" class="label">Switch</text>
+
+  <!-- Server -->
+  <rect x="880" y="240" width="220" height="140" class="server"/>
+  <text x="990" y="270" text-anchor="middle" class="label">Application Server</text>
+  <text x="990" y="290" text-anchor="middle" class="small">IP: 192.168.1.10</text>
+  <!-- DB cylinder -->
+  <g transform="translate(900,305)">
+    <ellipse cx="80" cy="0" rx="70" ry="12" fill="#bae6fd" stroke="#0ea5e9" stroke-width="2"/>
+    <rect x="10" y="0" width="140" height="55" fill="#e0f2fe" stroke="#0ea5e9" stroke-width="2"/>
+    <ellipse cx="80" cy="55" rx="70" ry="12" fill="#bae6fd" stroke="#0ea5e9" stroke-width="2"/>
+  </g>
+  <text x="990" y="372" text-anchor="middle" class="small">Database (MySQL/JSON)</text>
+
+  <!-- Clients -->
+  <g>
+    <rect x="140" y="430" width="200" height="110" class="device"/>
+    <text x="240" y="465" text-anchor="middle" class="label">Client A</text>
+    <text x="240" y="485" text-anchor="middle" class="small">IP: 192.168.1.11</text>
+    <rect x="170" y="495" width="60" height="30" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/>
+    <rect x="245" y="495" width="60" height="30" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/>
+  </g>
+
+  <g>
+    <rect x="380" y="430" width="200" height="110" class="device"/>
+    <text x="480" y="465" text-anchor="middle" class="label">Client B</text>
+    <text x="480" y="485" text-anchor="middle" class="small">IP: 192.168.1.12</text>
+    <rect x="410" y="495" width="60" height="30" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/>
+    <rect x="485" y="495" width="60" height="30" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/>
+  </g>
+
+  <g>
+    <rect x="620" y="430" width="200" height="110" class="device"/>
+    <text x="720" y="465" text-anchor="middle" class="label">Client C</text>
+    <text x="720" y="485" text-anchor="middle" class="small">IP: 192.168.1.13</text>
+    <rect x="650" y="495" width="60" height="30" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/>
+    <rect x="725" y="495" width="60" height="30" fill="#c7d2fe" stroke="#4338ca" stroke-width="2"/>
+  </g>
+
+  <!-- Wired links -->
+  <line x1="600" y1="230" x2="600" y2="270" class="line"/>
+  <line x1="880" y1="310" x2="680" y2="300" class="line"/>
+  <line x1="240" y1="430" x2="600" y2="330" class="line"/>
+  <line x1="480" y1="430" x2="600" y2="330" class="line"/>
+  <line x1="720" y1="430" x2="600" y2="330" class="line"/>
+
+  <!-- Traffic arrows (logical) -->
+  <line x1="260" y1="420" x2="900" y2="320" class="line dashed" marker-end="url(#arrow)"/>
+  <text x="580" y="345" text-anchor="middle" class="small" fill="#111827">HTTP Request (Client → Server)</text>
+
+  <line x1="900" y1="345" x2="300" y2="520" class="line dashed" marker-end="url(#arrow)"/>
+  <text x="620" y="470" text-anchor="middle" class="small" fill="#111827">HTTP Response / Data (Server → Client)</text>
+
+  <!-- Legend and notes -->
+  <rect x="860" y="430" width="260" height="220" class="legend"/>
+  <text x="990" y="460" text-anchor="middle" class="label">Keterangan</text>
+  <text x="880" y="485" class="small">• Router: Gerbang ke jaringan lain/internet (Gateway 192.168.1.1)</text>
+  <text x="880" y="505" class="small">• Switch: Menghubungkan perangkat dalam LAN (Layer 2)</text>
+  <text x="880" y="525" class="small">• Server: Menyediakan layanan (API/Database) untuk klien</text>
+  <text x="880" y="545" class="small">• Client: Mengirim request, menerima dan menampilkan data</text>
+  <text x="880" y="565" class="small">• Protokol umum: HTTP/HTTPS, TCP/IP</text>
+  <text x="880" y="585" class="small">• Contoh alur: Client → API /students → Server → Response JSON</text>
+  <text x="880" y="605" class="small">• Subnet contoh: 192.168.1.0/24 (Mask 255.255.255.0)</text>
+
+  <!-- Footer -->
+  <text x="600" y="760" text-anchor="middle" class="muted">Diagram konseptual — bukan skema fisik detail, untuk materi Pertemuan 1</text>
+</svg>

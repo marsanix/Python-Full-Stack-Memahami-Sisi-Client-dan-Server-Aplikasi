@@ -1,0 +1,935 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hasil Pencarian - Praktik Pertemuan 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .navigation {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-info {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .flash-success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .flash-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .flash-info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .search-summary {
+            background: #e3f2fd;
+            border: 1px solid #bbdefb;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .search-summary h3 {
+            color: #1976d2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-criteria {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+
+        .criteria-item {
+            background: white;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #bbdefb;
+        }
+
+        .criteria-label {
+            font-weight: bold;
+            color: #1976d2;
+            font-size: 0.9em;
+        }
+
+        .criteria-value {
+            color: #424242;
+            margin-top: 5px;
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .results-count {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #28a745;
+        }
+
+        .results-actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .sort-controls {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            border: 1px solid #e9ecef;
+        }
+
+        .sort-controls h4 {
+            margin-bottom: 15px;
+            color: #495057;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sort-options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .sort-options select {
+            padding: 8px 12px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+            background: white;
+        }
+
+        .export-options {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .btn-sm {
+            padding: 8px 16px;
+            font-size: 0.9em;
+        }
+
+        .results-table {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+        }
+
+        .table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .table th {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: bold;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .table th.sortable {
+            cursor: pointer;
+            user-select: none;
+            position: relative;
+        }
+
+        .table th.sortable:hover {
+            background: linear-gradient(135deg, #20c997 0%, #28a745 100%);
+        }
+
+        .table th.sortable::after {
+            content: '↕️';
+            position: absolute;
+            right: 8px;
+            opacity: 0.7;
+        }
+
+        .table th.sort-asc::after {
+            content: '↑';
+            color: #ffc107;
+        }
+
+        .table th.sort-desc::after {
+            content: '↓';
+            color: #ffc107;
+        }
+
+        .table td {
+            padding: 15px;
+            border-bottom: 1px solid #e9ecef;
+            vertical-align: middle;
+        }
+
+        .table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .table tbody tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .table tbody tr:nth-child(even):hover {
+            background: #e9ecef;
+        }
+
+        .student-id {
+            font-weight: bold;
+            color: #6c757d;
+            font-size: 0.9em;
+        }
+
+        .student-name {
+            font-weight: bold;
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        .student-class {
+            background: #17a2b8;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.9em;
+            font-weight: bold;
+            display: inline-block;
+        }
+
+        .student-age {
+            color: #6c757d;
+            font-weight: bold;
+        }
+
+        .student-address {
+            color: #495057;
+            max-width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .btn-xs {
+            padding: 6px 12px;
+            font-size: 0.8em;
+            border-radius: 4px;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .btn-danger {
+            background: #dc3545;
+            color: white;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6c757d;
+        }
+
+        .no-results .icon {
+            font-size: 4em;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .no-results h3 {
+            margin-bottom: 15px;
+            color: #495057;
+        }
+
+        .no-results p {
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .search-suggestions {
+            background: #fff3cd;
+            border: 1px solid #ffeaa7;
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 20px;
+        }
+
+        .search-suggestions h4 {
+            color: #856404;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .search-suggestions ul {
+            margin-left: 20px;
+            color: #856404;
+        }
+
+        .search-suggestions li {
+            margin-bottom: 8px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .page-btn {
+            padding: 10px 15px;
+            border: 1px solid #dee2e6;
+            background: white;
+            color: #495057;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .page-btn:hover {
+            background: #e9ecef;
+            border-color: #adb5bd;
+        }
+
+        .page-btn.active {
+            background: #28a745;
+            color: white;
+            border-color: #28a745;
+        }
+
+        .page-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .highlight {
+            background: #fff3cd;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-weight: bold;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+            }
+            
+            .btn {
+                text-align: center;
+                justify-content: center;
+            }
+
+            .results-info {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sort-options {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .sort-options select {
+                width: 100%;
+            }
+
+            .results-table {
+                overflow-x: auto;
+            }
+
+            .table {
+                min-width: 600px;
+            }
+
+            .search-criteria {
+                grid-template-columns: 1fr;
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .btn-xs {
+                text-align: center;
+                justify-content: center;
+            }
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+        }
+
+        .loading .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #28a745;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Hasil Pencarian</h1>
+            <p>Menampilkan hasil pencarian siswa</p>
+        </div>
+
+        <div class="content">
+            <!-- Navigation -->
+            <div class="navigation">
+                <a href="/" class="btn btn-secondary">
+                    ← Kembali ke Daftar Siswa
+                </a>
+                <a href="/cari" class="btn btn-info">
+                    🔍 Pencarian Baru
+                </a>
+                <a href="/tambah" class="btn btn-success">
+                    ➕ Tambah Siswa Baru
+                </a>
+            </div>
+
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ category }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Search Summary -->
+            <div class="search-summary">
+                <h3>🔍 Kriteria Pencarian</h3>
+                <div class="search-criteria">
+                    {% if query %}
+                    <div class="criteria-item">
+                        <div class="criteria-label">Kata Kunci</div>
+                        <div class="criteria-value">{{ query }}</div>
+                    </div>
+                    {% endif %}
+                    {% if nama %}
+                    <div class="criteria-item">
+                        <div class="criteria-label">Nama</div>
+                        <div class="criteria-value">{{ nama }}</div>
+                    </div>
+                    {% endif %}
+                    {% if kelas %}
+                    <div class="criteria-item">
+                        <div class="criteria-label">Kelas</div>
+                        <div class="criteria-value">{{ kelas }}</div>
+                    </div>
+                    {% endif %}
+                    {% if umur_min or umur_max %}
+                    <div class="criteria-item">
+                        <div class="criteria-label">Rentang Umur</div>
+                        <div class="criteria-value">
+                            {{ umur_min or 'Min' }} - {{ umur_max or 'Max' }} tahun
+                        </div>
+                    </div>
+                    {% endif %}
+                    {% if alamat %}
+                    <div class="criteria-item">
+                        <div class="criteria-label">Alamat</div>
+                        <div class="criteria-value">{{ alamat }}</div>
+                    </div>
+                    {% endif %}
+                </div>
+                <div style="color: #1976d2; font-weight: bold;">
+                    ⏱️ Waktu pencarian: {{ waktu_pencarian or '0.05' }} detik
+                </div>
+            </div>
+
+            {% if hasil_siswa %}
+            <!-- Results Info -->
+            <div class="results-info">
+                <div class="results-count">
+                    📊 Ditemukan {{ hasil_siswa|length }} siswa
+                    {% if total_siswa %}dari {{ total_siswa }} total siswa{% endif %}
+                </div>
+                <div class="results-actions">
+                    <div class="export-options">
+                        <a href="#" class="btn btn-sm btn-success" onclick="exportToCSV()">
+                            📄 Export CSV
+                        </a>
+                        <a href="#" class="btn btn-sm btn-info" onclick="printResults()">
+                            🖨️ Print
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sort Controls -->
+            <div class="sort-controls">
+                <h4>🔧 Pengaturan Tampilan</h4>
+                <div class="sort-options">
+                    <label for="sortBy">Urutkan berdasarkan:</label>
+                    <select id="sortBy" onchange="sortTable(this.value)">
+                        <option value="nama">Nama (A-Z)</option>
+                        <option value="nama_desc">Nama (Z-A)</option>
+                        <option value="kelas">Kelas</option>
+                        <option value="umur">Umur (Muda-Tua)</option>
+                        <option value="umur_desc">Umur (Tua-Muda)</option>
+                        <option value="id">ID Siswa</option>
+                    </select>
+                    
+                    <label for="showEntries">Tampilkan:</label>
+                    <select id="showEntries" onchange="changePageSize(this.value)">
+                        <option value="10">10 entri</option>
+                        <option value="25" selected>25 entri</option>
+                        <option value="50">50 entri</option>
+                        <option value="100">100 entri</option>
+                        <option value="all">Semua entri</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Results Table -->
+            <div class="results-table">
+                <table class="table" id="resultsTable">
+                    <thead>
+                        <tr>
+                            <th class="sortable" onclick="sortTableByColumn(0)">ID</th>
+                            <th class="sortable" onclick="sortTableByColumn(1)">Nama Siswa</th>
+                            <th class="sortable" onclick="sortTableByColumn(2)">Kelas</th>
+                            <th class="sortable" onclick="sortTableByColumn(3)">Umur</th>
+                            <th class="sortable" onclick="sortTableByColumn(4)">Alamat</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for siswa in hasil_siswa %}
+                        <tr>
+                            <td>
+                                <span class="student-id">#{{ siswa.id }}</span>
+                            </td>
+                            <td>
+                                <span class="student-name">{{ siswa.nama }}</span>
+                            </td>
+                            <td>
+                                <span class="student-class">{{ siswa.kelas }}</span>
+                            </td>
+                            <td>
+                                <span class="student-age">{{ siswa.umur }} tahun</span>
+                            </td>
+                            <td>
+                                <span class="student-address" title="{{ siswa.alamat }}">
+                                    {{ siswa.alamat }}
+                                </span>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <a href="/edit/{{ siswa.id }}" class="btn btn-xs btn-warning">
+                                        ✏️ Edit
+                                    </a>
+                                    <a href="/hapus/{{ siswa.id }}" class="btn btn-xs btn-danger" 
+                                       onclick="return confirm('Apakah Anda yakin ingin menghapus data siswa {{ siswa.nama }}?')">
+                                        🗑️ Hapus
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination (if needed) -->
+            {% if total_pages and total_pages > 1 %}
+            <div class="pagination">
+                {% if current_page > 1 %}
+                <a href="?page={{ current_page - 1 }}" class="page-btn">« Sebelumnya</a>
+                {% endif %}
+                
+                {% for page in range(1, total_pages + 1) %}
+                    {% if page == current_page %}
+                    <span class="page-btn active">{{ page }}</span>
+                    {% else %}
+                    <a href="?page={{ page }}" class="page-btn">{{ page }}</a>
+                    {% endif %}
+                {% endfor %}
+                
+                {% if current_page < total_pages %}
+                <a href="?page={{ current_page + 1 }}" class="page-btn">Selanjutnya »</a>
+                {% endif %}
+            </div>
+            {% endif %}
+
+            {% else %}
+            <!-- No Results -->
+            <div class="no-results">
+                <span class="icon">🔍</span>
+                <h3>Tidak Ada Hasil Ditemukan</h3>
+                <p>Maaf, tidak ada siswa yang sesuai dengan kriteria pencarian Anda.</p>
+                
+                <div class="search-suggestions">
+                    <h4>💡 Saran Pencarian</h4>
+                    <ul>
+                        <li>Periksa ejaan kata kunci yang Anda masukkan</li>
+                        <li>Coba gunakan kata kunci yang lebih umum</li>
+                        <li>Kurangi jumlah filter yang digunakan</li>
+                        <li>Coba pencarian berdasarkan kelas atau umur saja</li>
+                        <li>Pastikan data yang dicari memang ada dalam database</li>
+                    </ul>
+                </div>
+                
+                <div style="margin-top: 30px;">
+                    <a href="/cari" class="btn btn-info">
+                        🔍 Coba Pencarian Lain
+                    </a>
+                    <a href="/tambah" class="btn btn-success">
+                        ➕ Tambah Siswa Baru
+                    </a>
+                </div>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+
+    <script>
+        // Auto hide flash messages
+        setTimeout(function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.style.transition = 'opacity 0.5s ease';
+                message.style.opacity = '0';
+                setTimeout(function() {
+                    message.remove();
+                }, 500);
+            });
+        }, 5000);
+
+        // Table sorting functionality
+        let sortDirection = {};
+
+        function sortTableByColumn(columnIndex) {
+            const table = document.getElementById('resultsTable');
+            const tbody = table.querySelector('tbody');
+            const rows = Array.from(tbody.querySelectorAll('tr'));
+            const headers = table.querySelectorAll('th');
+            
+            // Clear previous sort indicators
+            headers.forEach(header => {
+                header.classList.remove('sort-asc', 'sort-desc');
+            });
+            
+            // Determine sort direction
+            const currentDirection = sortDirection[columnIndex] || 'asc';
+            const newDirection = currentDirection === 'asc' ? 'desc' : 'asc';
+            sortDirection[columnIndex] = newDirection;
+            
+            // Add sort indicator
+            headers[columnIndex].classList.add(newDirection === 'asc' ? 'sort-asc' : 'sort-desc');
+            
+            // Sort rows
+            rows.sort((a, b) => {
+                const aValue = a.cells[columnIndex].textContent.trim();
+                const bValue = b.cells[columnIndex].textContent.trim();
+                
+                let comparison = 0;
+                
+                // Handle different data types
+                if (columnIndex === 0) { // ID
+                    const aNum = parseInt(aValue.replace('#', ''));
+                    const bNum = parseInt(bValue.replace('#', ''));
+                    comparison = aNum - bNum;
+                } else if (columnIndex === 3) { // Age
+                    const aNum = parseInt(aValue);
+                    const bNum = parseInt(bValue);
+                    comparison = aNum - bNum;
+                } else { // Text
+                    comparison = aValue.localeCompare(bValue, 'id', { numeric: true });
+                }
+                
+                return newDirection === 'asc' ? comparison : -comparison;
+            });
+            
+            // Reorder table rows
+            rows.forEach(row => tbody.appendChild(row));
+        }
+
+        // Export to CSV
+        function exportToCSV() {
+            const table = document.getElementById('resultsTable');
+            const rows = table.querySelectorAll('tr');
+            let csv = [];
+            
+            for (let i = 0; i < rows.length; i++) {
+                const row = rows[i];
+                const cols = row.querySelectorAll('td, th');
+                let csvRow = [];
+                
+                for (let j = 0; j < cols.length - 1; j++) { // Exclude action column
+                    let cellText = cols[j].textContent.trim();
+                    cellText = cellText.replace(/"/g, '""'); // Escape quotes
+                    csvRow.push('"' + cellText + '"');
+                }
+                
+                csv.push(csvRow.join(','));
+            }
+            
+            const csvContent = csv.join('\n');
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            
+            if (link.download !== undefined) {
+                const url = URL.createObjectURL(blob);
+                link.setAttribute('href', url);
+                link.setAttribute('download', 'hasil_pencarian_siswa.csv');
+                link.style.visibility = 'hidden';
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
+        }
+
+        // Print results
+        function printResults() {
+            const printContent = document.querySelector('.container').innerHTML;
+            const originalContent = document.body.innerHTML;
+            
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        }
+
+        // Change page size
+        function changePageSize(size) {
+            const table = document.getElementById('resultsTable');
+            const tbody = table.querySelector('tbody');
+            const rows = tbody.querySelectorAll('tr');
+            
+            if (size === 'all') {
+                rows.forEach(row => row.style.display = '');
+            } else {
+                const limit = parseInt(size);
+                rows.forEach((row, index) => {
+                    row.style.display = index < limit ? '' : 'none';
+                });
+            }
+        }
+
+        // Highlight search terms
+        function highlightSearchTerms() {
+            const searchTerms = [
+                '{{ query or "" }}',
+                '{{ nama or "" }}',
+                '{{ alamat or "" }}'
+            ].filter(term => term.trim() !== '');
+            
+            if (searchTerms.length === 0) return;
+            
+            const tbody = document.querySelector('#resultsTable tbody');
+            const cells = tbody.querySelectorAll('td');
+            
+            cells.forEach(cell => {
+                let content = cell.innerHTML;
+                searchTerms.forEach(term => {
+                    if (term.length > 2) {
+                        const regex = new RegExp(`(${term})`, 'gi');
+                        content = content.replace(regex, '<span class="highlight">$1</span>');
+                    }
+                });
+                cell.innerHTML = content;
+            });
+        }
+
+        // Keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // Ctrl+P to print
+            if (e.ctrlKey && e.key === 'p') {
+                e.preventDefault();
+                printResults();
+            }
+            
+            // Ctrl+S to export
+            if (e.ctrlKey && e.key === 's') {
+                e.preventDefault();
+                exportToCSV();
+            }
+            
+            // ESC to go back
+            if (e.key === 'Escape') {
+                window.location.href = '/';
+            }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            highlightSearchTerms();
+            
+            // Set initial page size
+            changePageSize('25');
+        });
+
+        // Add loading state for actions
+        document.querySelectorAll('a[href*="/edit/"], a[href*="/hapus/"]').forEach(link => {
+            link.addEventListener('click', function() {
+                const loadingDiv = document.createElement('div');
+                loadingDiv.className = 'loading';
+                loadingDiv.innerHTML = '<div class="spinner"></div><p>Memproses...</p>';
+                
+                if (this.href.includes('/hapus/')) {
+                    // Only show loading for delete if confirmed
+                    const confirmed = confirm('Apakah Anda yakin ingin menghapus data siswa ini?');
+                    if (confirmed) {
+                        document.body.appendChild(loadingDiv);
+                    } else {
+                        return false;
+                    }
+                } else {
+                    document.body.appendChild(loadingDiv);
+                }
+            });
+        });
+    </script>
+</body>
+</html>

@@ -20,7 +20,7 @@ DB_CONFIG = {
     'host': 'localhost',
     'database': 'python_fullstack_smp',
     'user': 'root',  # Ganti dengan username MySQL Anda
-    'password': '',  # Ganti dengan password MySQL Anda
+    'password': 'toor',  # Ganti dengan password MySQL Anda
     'charset': 'utf8mb4'
 }
 

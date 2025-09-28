@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Konfirmasi Hapus Siswa - Praktik Pertemuan 1</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .header::before {
+            content: '⚠️';
+            font-size: 4em;
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: white;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        .header h1 {
+            font-size: 2.2em;
+            margin-bottom: 10px;
+            margin-top: 40px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .header p {
+            font-size: 1.1em;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .warning-box {
+            background: #fff3cd;
+            border: 2px solid #ffeaa7;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .warning-box .warning-icon {
+            font-size: 3em;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .warning-box h2 {
+            color: #856404;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .warning-box p {
+            color: #856404;
+            font-size: 1.1em;
+            line-height: 1.6;
+        }
+
+        .student-card {
+            background: #f8f9fa;
+            border: 2px solid #e9ecef;
+            border-radius: 10px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .student-card h3 {
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 1.3em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .student-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .detail-item {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #dee2e6;
+        }
+
+        .detail-label {
+            font-weight: bold;
+            color: #6c757d;
+            font-size: 0.9em;
+            margin-bottom: 5px;
+        }
+
+        .detail-value {
+            color: #495057;
+            font-size: 1.1em;
+        }
+
+        .detail-value.highlight {
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .consequences {
+            background: #f8d7da;
+            border: 2px solid #f5c6cb;
+            border-radius: 10px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .consequences h4 {
+            color: #721c24;
+            margin-bottom: 15px;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .consequences ul {
+            color: #721c24;
+            margin-left: 20px;
+        }
+
+        .consequences li {
+            margin-bottom: 8px;
+            line-height: 1.5;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1em;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 180px;
+            justify-content: center;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+            color: white;
+        }
+
+        .btn-secondary {
+            background: linear-gradient(135deg, #6c757d 0%, #5a6268 100%);
+            color: white;
+        }
+
+        .btn-info {
+            background: linear-gradient(135deg, #17a2b8 0%, #138496 100%);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .btn-danger:hover {
+            background: linear-gradient(135deg, #c82333 0%, #a71e2a 100%);
+        }
+
+        .countdown {
+            text-align: center;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+            color: #dc3545;
+            font-weight: bold;
+        }
+
+        .flash-messages {
+            margin-bottom: 20px;
+        }
+
+        .flash-message {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .flash-error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 1.8em;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-width: auto;
+                width: 100%;
+            }
+
+            .student-details {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 10px rgba(220, 53, 69, 0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(220, 53, 69, 0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🗑️ Konfirmasi Penghapusan</h1>
+            <p>Tindakan ini tidak dapat dibatalkan!</p>
+        </div>
+
+        <div class="content">
+            <!-- Flash Messages -->
+            {% with messages = get_flashed_messages(with_categories=true) %}
+                {% if messages %}
+                    <div class="flash-messages">
+                        {% for category, message in messages %}
+                            <div class="flash-message flash-{{ 'error' if category == 'error' else 'success' }}">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            {% endwith %}
+
+            <!-- Warning Box -->
+            <div class="warning-box">
+                <span class="warning-icon">🚨</span>
+                <h2>PERINGATAN PENTING!</h2>
+                <p>Anda akan menghapus data siswa secara permanen. Data yang sudah dihapus tidak dapat dikembalikan lagi.</p>
+            </div>
+
+            <!-- Student Information -->
+            <div class="student-card">
+                <h3>👤 Data Siswa yang Akan Dihapus</h3>
+                <div class="student-details">
+                    <div class="detail-item">
+                        <div class="detail-label">ID Siswa</div>
+                        <div class="detail-value highlight">#{{ siswa.id }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Nama Lengkap</div>
+                        <div class="detail-value highlight">{{ siswa.nama }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Kelas</div>
+                        <div class="detail-value">{{ siswa.kelas }}</div>
+                    </div>
+                    <div class="detail-item">
+                        <div class="detail-label">Umur</div>
+                        <div class="detail-value">{{ siswa.umur }} tahun</div>
+                    </div>
+                </div>
+                <div style="margin-top: 15px;">
+                    <div class="detail-label">Alamat Lengkap</div>
+                    <div class="detail-value">{{ siswa.alamat }}</div>
+                </div>
+                {% if siswa.created_at %}
+                <div style="margin-top: 15px;">
+                    <div class="detail-label">Tanggal Pendaftaran</div>
+                    <div class="detail-value">{{ siswa.created_at.strftime('%d %B %Y, %H:%M') if siswa.created_at else 'Tidak tersedia' }}</div>
+                </div>
+                {% endif %}
+            </div>
+
+            <!-- Consequences -->
+            <div class="consequences">
+                <h4>⚠️ Konsekuensi Penghapusan</h4>
+                <ul>
+                    <li>Semua data siswa akan dihapus secara permanen dari database</li>
+                    <li>Riwayat akademik dan data terkait akan hilang</li>
+                    <li>Data tidak dapat dipulihkan setelah dihapus</li>
+                    <li>ID siswa #{{ siswa.id }} tidak akan dapat digunakan lagi</li>
+                    <li>Laporan dan statistik akan terpengaruh</li>
+                </ul>
+            </div>
+
+            <!-- Countdown Timer -->
+            <div class="countdown" id="countdown">
+                Tombol hapus akan aktif dalam <span id="timer">5</span> detik...
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <form method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-danger pulse" id="deleteBtn" disabled>
+                        🗑️ Ya, Hapus Siswa
+                    </button>
+                </form>
+                <a href="/" class="btn btn-secondary">
+                    ❌ Batal, Kembali ke Daftar
+                </a>
+                <a href="/edit/{{ siswa.id }}" class="btn btn-info">
+                    ✏️ Edit Data Saja
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Countdown timer for delete button
+        let timeLeft = 5;
+        const timerElement = document.getElementById('timer');
+        const deleteBtn = document.getElementById('deleteBtn');
+        const countdownElement = document.getElementById('countdown');
+
+        const countdown = setInterval(function() {
+            timeLeft--;
+            timerElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                deleteBtn.disabled = false;
+                deleteBtn.classList.remove('pulse');
+                countdownElement.innerHTML = '<span style="color: #28a745;">✅ Tombol hapus sudah aktif</span>';
+                
+                // Add hover effect
+                deleteBtn.style.cursor = 'pointer';
+            }
+        }, 1000);
+
+        // Double confirmation for delete
+        deleteBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const studentName = '{{ siswa.nama }}';
+            const studentId = '{{ siswa.id }}';
+            
+            // First confirmation
+            const firstConfirm = confirm(
+                `Apakah Anda benar-benar yakin ingin menghapus data siswa "${studentName}" (ID: #${studentId})?\n\n` +
+                `Tindakan ini TIDAK DAPAT DIBATALKAN!`
+            );
+            
+            if (firstConfirm) {
+                // Second confirmation
+                const secondConfirm = confirm(
+                    `KONFIRMASI TERAKHIR!\n\n` +
+                    `Ketik "HAPUS" di kotak konfirmasi berikutnya untuk melanjutkan penghapusan data siswa "${studentName}".`
+                );
+                
+                if (secondConfirm) {
+                    const finalConfirm = prompt(
+                        `Ketik "HAPUS" (tanpa tanda kutip) untuk mengkonfirmasi penghapusan data siswa "${studentName}":`
+                    );
+                    
+                    if (finalConfirm === "HAPUS") {
+                        // Submit the form
+                        this.closest('form').submit();
+                    } else {
+                        alert('Konfirmasi tidak sesuai. Penghapusan dibatalkan.');
+                    }
+                } else {
+                    alert('Penghapusan dibatalkan.');
+                }
+            } else {
+                alert('Penghapusan dibatalkan.');
+            }
+        });
+
+        // Auto hide flash messages
+        setTimeout(function() {
+            const flashMessages = document.querySelectorAll('.flash-message');
+            flashMessages.forEach(function(message) {
+                message.style.transition = 'opacity 0.5s ease';
+                message.style.opacity = '0';
+                setTimeout(function() {
+                    message.remove();
+                }, 500);
+            });
+        }, 5000);
+
+        // Prevent accidental page close
+        window.addEventListener('beforeunload', function(e) {
+            if (!deleteBtn.disabled) {
+                e.preventDefault();
+                e.returnValue = 'Anda yakin ingin meninggalkan halaman ini?';
+            }
+        });
+
+        // Add keyboard shortcuts
+        document.addEventListener('keydown', function(e) {
+            // ESC key to cancel
+            if (e.key === 'Escape') {
+                window.location.href = '/';
+            }
+            
+            // Ctrl+E to edit
+            if (e.ctrlKey && e.key === 'e') {
+                e.preventDefault();
+                window.location.href = '/edit/{{ siswa.id }}';
+            }
+        });
+
+        // Add visual feedback
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-3px) scale(1.02)';
+            });
+            
+            btn.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+    </script>
+</body>
+</html>

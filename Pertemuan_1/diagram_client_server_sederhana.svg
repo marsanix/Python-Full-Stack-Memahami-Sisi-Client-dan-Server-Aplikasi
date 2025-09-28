@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="420" viewBox="0 0 900 420">
+  <defs>
+    <style>
+      .title { font: 700 24px 'Segoe UI', Arial, sans-serif; fill: #1f2937; }
+      .label { font: 600 16px 'Segoe UI', Arial, sans-serif; fill: #111827; }
+      .small { font: 12px 'Segoe UI', Arial, sans-serif; fill: #374151; }
+      .box { fill: #ffffff; stroke: #1f2937; stroke-width: 2; rx: 12; }
+      .client { fill: #eef2ff; stroke: #4338ca; stroke-width: 2; rx: 12; }
+      .server { fill: #ecfeff; stroke: #0e7490; stroke-width: 2; rx: 12; }
+      .line { stroke: #6b7280; stroke-width: 2.5; }
+      .dashed { stroke-dasharray: 6 6; }
+    </style>
+
+    <marker id="arrow" viewBox="0 0 10 10" refX="10" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#6b7280"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="900" height="420" fill="#ffffff"/>
+
+  <!-- Header -->
+  <text x="450" y="50" text-anchor="middle" class="title">Topologi Paling Sederhana: Client ↔ Server</text>
+
+  <!-- Client box -->
+  <rect x="100" y="130" width="260" height="180" class="client"/>
+  <text x="230" y="165" text-anchor="middle" class="label">Client</text>
+  <text x="230" y="185" text-anchor="middle" class="small">Browser / Aplikasi</text>
+  <!-- simple screen icon -->
+  <rect x="140" y="200" width="180" height="80" fill="#c7d2fe" stroke="#4338ca" stroke-width="2" rx="8"/>
+  <rect x="200" y="285" width="60" height="8" fill="#4338ca" rx="4"/>
+
+  <!-- Server box -->
+  <rect x="540" y="130" width="260" height="180" class="server"/>
+  <text x="670" y="165" text-anchor="middle" class="label">Server</text>
+  <text x="670" y="185" text-anchor="middle" class="small">API / Database</text>
+  <!-- simple rack icon -->
+  <rect x="585" y="200" width="170" height="28" fill="#bae6fd" stroke="#0ea5e9" stroke-width="2" rx="6"/>
+  <rect x="585" y="236" width="170" height="28" fill="#bae6fd" stroke="#0ea5e9" stroke-width="2" rx="6"/>
+  <rect x="585" y="272" width="170" height="28" fill="#bae6fd" stroke="#0ea5e9" stroke-width="2" rx="6"/>
+
+  <!-- Network line -->
+  <line x1="360" y1="220" x2="540" y2="220" class="line"/>
+  <line x1="360" y1="245" x2="540" y2="245" class="line"/>
+
+  <!-- Logical traffic arrows -->
+  <line x1="380" y1="210" x2="520" y2="210" class="line dashed" marker-end="url(#arrow)"/>
+  <text x="450" y="195" text-anchor="middle" class="small">HTTP Request (Client → Server)</text>
+
+  <line x1="520" y1="255" x2="380" y2="255" class="line dashed" marker-end="url(#arrow)"/>
+  <text x="450" y="275" text-anchor="middle" class="small">HTTP Response (Server → Client)</text>
+
+  <!-- Notes -->
+  <text x="450" y="350" text-anchor="middle" class="small">Contoh: Client mengakses /students → Server mengirim data JSON</text>
+</svg>
