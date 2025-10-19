@@ -15,7 +15,7 @@ services:
       MYSQL_USER: flask_user
       MYSQL_PASSWORD: flask_password
     ports:
-      - "3306:3306"
+      - "3324:3306"
     volumes:
       # Mount script SQL untuk inisialisasi database
       - ./database_setup.sql:/docker-entrypoint-initdb.d/database_setup.sql
